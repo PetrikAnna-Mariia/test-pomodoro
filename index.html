@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <title>Pomodoro app</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header><img class="lable" src="./img./logo.svg" alt="pomodoro">
+            <div class="timer-button" id="timerButton">
+                <button data-name="timerPomodoro">pomodoro</button>
+                <button data-name="sortBreak">sort breake</button>
+                <button data-name="longBreak">long breake</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="base-timer">
+                <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <g class="base-timer__circle">
+                        <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+                        <path id="base-timer-path-remaining" stroke-dasharray="283" class="base-timer__path-remaining "
+                            d="
+              M 50, 50
+              m -45, 0
+              a 45,45 0 1,0 90,0
+              a 45,45 0 1,0 -90,0
+            "></path>
+                    </g>
+                </svg>
+                <button class="base-timer__label" id="startStop">
+                    <span id="baseTimerLabel">00:10</span>
+                    <br>
+                    <p>pause</p>
+                </button>
+            </div>
+            <button id="settings"><img src="./img/icon-settings.svg" alt="settings"></button>
+        </main>
+    </div>
+    <div id="shadow" hidden>
+        <div class="wrapper">
+            <div class="satting-page">
+                <div class="section box header">
+                    <div>timer settings</div> <button id="closeSetting"><img src="./img/icon-close.svg"
+                            alt="close"></button>
+                </div>
+                <div class="section box" id="timerInput">
+                    <div class="box-timer">
+                        <label for="Pomodoro">Pomodoro</label>
+                        <div class="cotainer" id="timerPomodoro">
+                            <input type="number" id="timerPomodoroMin" value="00" min="0" max="60">
+                            <span> : </span>
+                            <input type="number" id="timerPomodoroSec" value="15" min="0" max="60">
+                        </div>
+                    </div>
+                    <div class="box-timer">
+                        <label for="Break">Short Break</label>
+                        <div class="cotainer" id="sortBreak">
+                            <input type="number" id="sortBreakMin" value="00" min="0" max="60">
+                            <span>:</span>
+                            <input type="number" id="sortBreakSec" value="10" min="0" max="60">
+                        </div>
+                    </div>
+                    <div class="box-timer">
+                        <label for="Break">Long Break</label>
+                        <div class="cotainer" id="longBreak">
+                            <input type="number" id="longBreakMin" value="00" min="0" max="60">
+                            <span> : </span>
+                            <input type="number" id="longBreakSec" value="15" min="0" max="60">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="autoStart box">
+                    <p>Auto start next round?</p>
+                    <div class="button" id="autoStart">
+                        <div class="switch"></div>
+                    </div>
+                </div>
+                <div class="box">
+                    <label for="rateLongBreak">Long Break interval</label>
+                    <div class="container-rateLongBreak">
+                        <input type="number" id="rateLongBreak" value="0" min="0">
+                    </div>
+                </div>
+                <div class="theme box">
+                    <p>Change theme</p>
+                    <div class="button" id="changeTheme">
+                        <div class="switch"></div>
+                    </div>
+                </div>
+                <div class="box footer"> <button id="submit">OK</button></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="index.js"></script>
+</body>
+
+</html>

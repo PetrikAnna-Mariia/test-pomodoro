@@ -1,0 +1,261 @@
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Josefin Sans";
+    src: url(https://fonts.google.com/specimen/Josefin+Sans);
+    font-weight: 400, 700;
+}
+
+body {
+    background-color: rgb(36, 29, 102);
+    font-family: "Josefin Sans";
+    transition: background-color .3s linear;
+}
+
+button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.wrapper {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    max-width: 350px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+header {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.lable {
+    width: 153px;
+    height: 32px;
+    margin-bottom: 50px;
+}
+
+.timer-button {
+    background-color: rgb(14, 7, 73);
+    border-radius: 25px;
+    width: 300px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color .3s linear;
+}
+
+.timer-button button {
+    margin: 3px 5px;
+    border-radius: 16px;
+    color: rgb(170, 168, 168);
+    background-color: transparent;
+}
+
+.timer-button button:hover {
+    color: rgb(235, 235, 235);
+    transition: color .3s linear;
+}
+
+.base-timer {
+    position: relative;
+    height: 300px;
+    width: 300px;
+    margin-bottom: 50px;
+}
+
+.base-timer__svg {
+    transform: scaleX(-1);
+}
+
+.base-timer__circle {
+    fill: none;
+    stroke: none;
+}
+
+.base-timer__path-elapsed {
+    stroke-width: 7px;
+    stroke: grey;
+}
+
+.base-timer__path-remaining {
+    stroke-width: 7px;
+    stroke-linecap: round;
+    transform: rotate(90deg);
+    transform-origin: center;
+    transition: 1s linear all;
+    fill-rule: nonzero;
+    stroke: currentColor;
+}
+
+.base-timer__path-remaining.green {
+    color: rgb(65, 184, 131);
+}
+
+.base-timer__path-remaining.orange {
+    color: orange;
+}
+
+.base-timer__path-remaining.red {
+    color: red;
+}
+
+.base-timer__label {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+}
+
+#baseTimerLabel {
+    font-size: 48px;
+}
+
+#shadow {
+    position: absolute;
+    background-color: rgb(70, 67, 67, 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    top: 0;
+}
+
+.satting-page {
+    margin-top: 150px;
+    background-color: rgb(252, 252, 252);
+    padding: 25px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    width: 40px;
+    height: 30px;
+    border: none;
+    background-color: rgb(238, 237, 237);
+    border-radius: 6px;
+    display: block;
+}
+
+.cotainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    border-radius: 6px;
+    background-color: rgb(238, 237, 237);
+    padding: 5px;
+}
+
+.container-rateLongBreak {
+    display: flex;
+    border-radius: 6px;
+    background-color: rgb(238, 237, 237);
+    width: 50px;
+    justify-content: center;
+}
+
+.box {
+    border-bottom: 1px solid rgb(194, 194, 194);
+    padding: 15px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.header {
+    padding-top: 0;
+}
+
+.label {
+    margin-bottom: 10px;
+    text-align: center;
+    display: block;
+}
+
+.footer {
+    padding-bottom: 0;
+    border: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button {
+    display: flex;
+    height: 30px;
+    width: 60px;
+    background-color: rgb(238, 237, 237);
+    border-radius: 15px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.button-left {
+    justify-content: flex-end;
+}
+
+.switch {
+    background-color: rgb(135, 224, 2);
+    height: 26px;
+    width: 26px;
+    border-radius: 13px;
+    cursor: pointer;
+    transition: left .3s linear;
+}
+
+#startStop {
+    border: 1px solid transparent;
+    border-radius: 50%;
+}
+
+#submit {
+    padding: 10px 15px;
+    background-color: grey;
+    border-radius: 5px;
+    color: honeydew;
+}
+
+.light {
+    background-color: rgb(255, 251, 240);
+    transition: background-color .3s linear;
+}
+
+.light .timer-button {
+    background-color: rgb(250, 240, 211);
+    transition: background-color .3s linear;
+}
+
+.cotainer span {
+    font-size: 25px;
+}
