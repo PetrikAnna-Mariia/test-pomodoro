@@ -56,7 +56,7 @@ main {
 .timer-button {
     background-color: rgb(14, 7, 73);
     border-radius: 25px;
-    width: 300px;
+    width: 320px;
     height: 46px;
     display: flex;
     align-items: center;
@@ -67,10 +67,9 @@ main {
 .timer-button button {
     margin: 3px 5px;
     height: 35px;
-    padding: 5px;
+    padding: 0 5px;
     border-radius: 16px;
     color: rgb(170, 168, 168);
-    background-color: transparent;
 }
 
 .timer-button button:hover {
@@ -82,7 +81,16 @@ main {
     position: relative;
     height: 300px;
     width: 300px;
+    margin: 0 auto;
     margin-bottom: 50px;
+}
+
+.base-timer::before {
+    height: 350px;
+    width: 350px;
+    margin: 0 auto;
+    background: radial-gradient(#fcf8f8, #06060a);
+    z-index: 0;
 }
 
 .base-timer__svg {
@@ -95,12 +103,12 @@ main {
 }
 
 .base-timer__path-elapsed {
-    stroke-width: 7px;
+    stroke-width: 5px;
     stroke: grey;
 }
 
 .base-timer__path-remaining {
-    stroke-width: 7px;
+    stroke-width: 5px;
     stroke-linecap: round;
     transform: rotate(90deg);
     transform-origin: center;
@@ -184,9 +192,9 @@ input {
 }
 
 .box {
+    display: flex;
     border-bottom: 1px solid rgb(194, 194, 194);
     padding: 15px 0;
-    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -194,7 +202,6 @@ input {
 
 .section {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
 }
 

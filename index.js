@@ -139,6 +139,9 @@ class App {
                 return (sum += seconds);
             }, 0);
             timer.setNewTime(seconds);
+            if (this.currentTimer.name == timer.name) {
+                checkCurrentTimer(this.currentTimer, timer);
+            }
         });
     }
     getTimer(name) {
@@ -163,6 +166,14 @@ class App {
             nexStepTimer("sortBreak");
         }
     }
+}
+
+function checkCurrentTimer(currentTimer,timer) {
+        if (currentTimer.timeLeft <= timer.time){
+            currentTimer.timeLeft = timer.timeLeft - currentTimer.timePassed;
+            currentTimer.time = timer.time;
+            baseTimerLabel.innerHTML = formatTime(timer.timeLeft);
+        }
 }
 
 function nexStepTimer(name){
