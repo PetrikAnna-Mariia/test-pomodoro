@@ -99,17 +99,7 @@ main {
     z-index: 0;
 }
 
-/* .base-timer::after {
-    content: " ";
-    position: absolute;
-    left: -25px;
-    top: -25px;
-    height: 350px;
-    width: 350px;
-    margin: 0 auto;
-    background: radial-gradient( circle at bottom right, rgb(92, 86, 143), rgb(14, 7, 73), rgb(14, 7, 73));
-    z-index: 0;
-} */
+
 
 .base-timer__svg {
     transform: scaleX(-1);
