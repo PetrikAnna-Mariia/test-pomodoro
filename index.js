@@ -139,7 +139,6 @@ class App {
                 return (sum += seconds);
             }, 0);
             timer.setNewTime(seconds);
-            console.log(timer.time)
         });
     }
     getTimer(name) {
@@ -188,15 +187,15 @@ const longBreak = new Timer("longBreak", 12);
 
 const appTimer = new App();
 appTimer.addTimer([timerPomodoro, sortBreak, longBreak]);
-appTimer.currentTimer;
+appTimer.getTimer("timerPomodoro");
 
 
 colorCalculation = {
     warningThreshold(){
-        return Math.floor(appTimer.currentTimer.time / 4);
-    }
+        return Math.floor(appTimer.currentTimer.time / 2);
+    },
     alertThreshold(){
-        return Math.floor(appTimer.currentTimer.time / 5);
+        return Math.floor(appTimer.currentTimer.time / 3);
     }
 }
 
@@ -206,11 +205,11 @@ const COLOR_CODES = {
     },
     warning: {
         color: "orange",
-        threshold: colorCalculation.warningThreshold,
+        threshold: colorCalculation.warningThreshold(),
     },
     alert: {
         color: "red",
-        threshold: colorCalculation.alertThreshold,
+        threshold: colorCalculation.alertThreshold(),
     },
 };
 
@@ -241,25 +240,25 @@ function formatTime(time) {
 
 function setRemainingPathColor(timer) {
     const { alert, warning, info } = COLOR_CODES;
+    const runTimer = document.getElementById("base-timer-path-remaining");
     if (timer.timeLeft <= alert.threshold) {
-        document
-            .getElementById("base-timer-path-remaining")
-            .classList.remove(warning.color);
-        document
-            .getElementById("base-timer-path-remaining")
-            .classList.add(alert.color);
-    } else if (timer.timeLeft <= warning.threshold) {
-        document
-            .getElementById("base-timer-path-remaining")
-            .classList.remove(info.color);
-        document
-            .getElementById("base-timer-path-remaining")
-            .classList.add(warning.color);
+        runTimer.classList.remove(warning.color);
+        runTimer.classList.add(alert.color);
+            
+    } 
+    if (timer.timeLeft <= warning.threshold) {
+        runTimer.classList.remove(info.color);
+        runTimer.classList.add(warning.color);
+    }
+    else if(timer.timeLeft >= warning.threshold){
+        runTimer.classList.remove(alert.color);
+        runTimer.classList.remove(warning.color);
+        runTimer.classList.add(info.color);
     }
 }
 
 document
     .getElementById("base-timer-path-remaining")
     .classList.add(remainingPathColor);
-appTimer.getTimer("timerPomodoro");
+
 appTimer.loopTimer();
