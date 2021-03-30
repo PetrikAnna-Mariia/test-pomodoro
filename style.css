@@ -61,6 +61,7 @@ main {
     align-items: center;
     justify-content: space-between;
     transition: background-color .3s linear;
+    background-color: rgb(14, 7, 73);
 }
 
 .timer-button button {
@@ -69,7 +70,6 @@ main {
     padding: 0 5px;
     border-radius: 16px;
     color: rgb(170, 168, 168);
-    background-color: rgb(14, 7, 73);
 }
 
 .timer-button button:hover {
@@ -90,18 +90,26 @@ main {
     content: " ";
     position: absolute;
     border-radius: 50%;
+    left: -17px;
+    top: -17px;
+    height: 330px;
+    width: 330px;
+    margin: 0 auto;
+    background: radial-gradient( circle at bottom right, rgb(92, 86, 143), rgb(14, 7, 73), rgb(14, 7, 73));
+    z-index: 0;
+}
+
+/* .base-timer::after {
+    content: " ";
+    position: absolute;
     left: -25px;
     top: -25px;
     height: 350px;
     width: 350px;
     margin: 0 auto;
-    background: radial-gradient(#fffefe, rgb(36, 29, 102));
+    background: radial-gradient( circle at bottom right, rgb(92, 86, 143), rgb(14, 7, 73), rgb(14, 7, 73));
     z-index: 0;
-}
-
-.base-timer::after {
-    content: " ";
-}
+} */
 
 .base-timer__svg {
     transform: scaleX(-1);
@@ -110,11 +118,6 @@ main {
 .base-timer__circle {
     fill: none;
     stroke: none;
-}
-
-.base-timer__path-elapsed {
-    stroke-width: 5px;
-    stroke: grey;
 }
 
 .base-timer__path-remaining {
@@ -151,7 +154,7 @@ main {
     flex-direction: column;
     color: aliceblue;
     border-radius: 50%;
-    background-color: rgb(36, 29, 102);
+    background-color: rgb(14, 7, 73);
 }
 
 #baseTimerLabel {
@@ -287,13 +290,8 @@ input {
     font-size: 25px;
 }
 
-.light .timer-button button {
+.light .timer-button  {
     background-color: rgb(250, 240, 211);
-}
-
-.timer-button .selected-timer {
-    background-color: rgb(255, 145, 145);
-    color: rgb(36, 29, 102);
 }
 
 .pause-start {
@@ -305,4 +303,17 @@ input {
 
 .light .base-timer__label {
     color: rgb(173, 173, 171);
+}
+
+.timer-button .selected-timer{
+    background-color: rgb(255, 145, 145);
+    color: rgb(36, 29, 102);
+}
+
+.light .base-timer::before {
+    background: radial-gradient( circle at bottom right, rgb(250, 249, 246), rgb(243, 236, 214), rgb(243, 236, 214));
+}
+
+.light .base-timer__label {
+    background-color: rgb(243, 236, 214);
 }
