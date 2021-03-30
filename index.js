@@ -1,8 +1,9 @@
 const fullDashArray = 283;
 let timerInterval;
 let isRunning = true;
-
+let flag = false;
 const {
+    audio,
     settings,
     startStop,
     shadow,
@@ -26,33 +27,35 @@ function switchTimer(event) {
     if (event.target.tagName != "BUTTON") return;
     let permission = confirm("do you want to switch timer? ")
     if(permission){
-        let timer = appTimer.getTimer(event.target.dataset.name);
         onTimesUp();
-        baseTimerLabel.innerHTML = formatTime(timer.time);
-        setCircleDasharray(timer);
+        nexStepTimer(event.target.dataset.name);
         appTimer.currentRound = 0;
-        appTimer.loopTimer(timer);
     }   
 }
 
+
+
 function switchStartStop() {
-    console.log(isRunning);
+
     if (!isRunning) {
-        console.log(appTimer.currentTimer);
+        document.querySelector(".pause-start").innerHTML = "pause";
         startTimer(appTimer.currentTimer);
         isRunning = true;
     } else {
+        document.querySelector(".pause-start").innerHTML = "start"
         onTimesUp();
         isRunning = false;
     }
 }
 
 function startTimer(timer) {
-    console.log(timer)
-    baseTimerLabel.innerHTML = formatTime(timer.timeLeft);
     timerInterval = setInterval(() => {
         timer.timePassed = timer.timePassed += 1;
         timer.timeLeft = timer.time - timer.timePassed;
+        if (!timer.timeLeft) {
+            audio.play();
+        } ;
+        baseTimerLabel.innerHTML = formatTime(timer.timeLeft);
         if (timer.timeLeft === -1) {
             onTimesUp();
             appTimer.currentRound++;
@@ -60,10 +63,8 @@ function startTimer(timer) {
             timer.timeLeft = timer.time;
             timer.timePassed = 0;
         }
-        if (timer.timePassed)
-            baseTimerLabel.innerHTML = formatTime(timer.timeLeft);
         setCircleDasharray(timer);
-        setRemainingPathColor(timer.timeLeft);
+        setRemainingPathColor(timer);
     }, 1000);
 }
 
@@ -85,7 +86,7 @@ function switchFlag(event) {
     if (!this == event.target) return;
     this.classList.toggle("button-left");
     if (this.id == "changeTheme") document.body.classList.toggle("light");
-    else appTimer.autoStart != appTimer.autoStart;
+    else flag = true;
 }
 
 function switchSetting() {
@@ -98,26 +99,30 @@ function settingsHidden(event) {
 
 function changeTimer() {
     appTimer.updateTimer();
+    if(flag) appTimer.autoStart = !appTimer.autoStart;
+    flag = false;
     switchSetting();
 }
 
 class Timer {
     constructor(name, time) {
-        (this.name = name),
-            (this.time = time),
-            (this.timeLeft = time),
-            (this.timePassed = 0);
+        this.name = name,
+        this.time = time,
+        this.timeLeft = time,
+        this.timePassed = 0;
     }
     setNewTime(time) {
         this.time = time;
+        this.timeLeft = time;
+        this.timePassed = 0;
     }
 }
 
 class App {
     constructor() {
-        (this.arrTimer = []),
-            (this.autoStart = true),
-            (this.repeatLongBreak = 2);
+        this.arrTimer = [],
+        this.autoStart = false,
+        this.repeatLongBreak = 2;
         this.currentRound = 1;
     }
     addTimer(timers) {
@@ -134,6 +139,7 @@ class App {
                 return (sum += seconds);
             }, 0);
             timer.setNewTime(seconds);
+            console.log(timer.time)
         });
     }
     getTimer(name) {
@@ -146,29 +152,34 @@ class App {
     }
 
     loopTimer() {
-            if (this.repeatLongBreak * 2 === this.currentRound) {
-                let timer = changeTimer(2);
-                if (this.autoStart) startTimer(timer);
-                this.currentRound = 0;
-                return;
-            }
+        if (this.repeatLongBreak * 2 === this.currentRound) {
+            nexStepTimer("longBreak");
+            this.currentRound = 0;
+            return;
+        }
         if (this.currentRound % 2) {
-            let timer = changeTimer(0);
-            if (this.autoStart) startTimer(timer);
+            nexStepTimer("timerPomodoro");
         }
         if (!(this.currentRound % 2)) {
-            let timer = changeTimer(1);
-            if (this.autoStart) startTimer(timer);
+            nexStepTimer("sortBreak");
         }
     }
 }
 
-function changeTimer(num){
+function nexStepTimer(name){
     if(!appTimer.autoStart) isRunning = false;
-    let timer = appTimer.getTimer(appTimer.arrTimer[num].name);
+    changeClassTimer(appTimer.currentTimer.name);
+    let timer = appTimer.getTimer(name);
+    changeClassTimer(appTimer.currentTimer.name);
     baseTimerLabel.innerHTML = formatTime(timer.timeLeft);
     setCircleDasharray(timer);
-    return timer;
+    if (appTimer.autoStart) startTimer(timer);
+}
+
+function changeClassTimer(name){
+    document.body
+        .querySelector(`[data-name=${name}]`)
+        .classList.toggle("selected-timer");
 }
 
 const timerPomodoro = new Timer("timerPomodoro", 3);
@@ -203,16 +214,23 @@ function onTimesUp() {
 }
 
 function formatTime(time) {
-    const minutes = Math.floor(time / 60);
+    let minutes = Math.floor(time / 60);
 
     let seconds = time % 60;
 
-    if (seconds < 10) {
-        seconds = `0${seconds}`;
-    }
+    seconds = check(seconds);
+    minutes = check(minutes);
 
     return `${minutes}:${seconds}`;
+
+    function check(num){
+        if (num < 10) {
+            num = `0${num}`;
+        }
+        return num;
+    }
 }
+
 
 function setRemainingPathColor(timer) {
     const { alert, warning, info } = COLOR_CODES;
@@ -236,5 +254,5 @@ function setRemainingPathColor(timer) {
 document
     .getElementById("base-timer-path-remaining")
     .classList.add(remainingPathColor);
-
+appTimer.getTimer("timerPomodoro");
 appTimer.loopTimer();

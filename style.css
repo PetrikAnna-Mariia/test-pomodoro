@@ -66,6 +66,8 @@ main {
 
 .timer-button button {
     margin: 3px 5px;
+    height: 35px;
+    padding: 5px;
     border-radius: 16px;
     color: rgb(170, 168, 168);
     background-color: transparent;
@@ -108,7 +110,7 @@ main {
 }
 
 .base-timer__path-remaining.green {
-    color: rgb(65, 184, 131);
+    color: rgb(255, 145, 145);
 }
 
 .base-timer__path-remaining.orange {
@@ -127,11 +129,13 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     color: aliceblue;
 }
 
 #baseTimerLabel {
-    font-size: 48px;
+    font-size: 60px;
+    margin-bottom: 40px;
 }
 
 #shadow {
@@ -226,12 +230,16 @@ input {
 }
 
 .switch {
-    background-color: rgb(135, 224, 2);
-    height: 26px;
-    width: 26px;
+    background-color: rgb(255, 250, 250);
+    height: 28px;
+    width: 28px;
     border-radius: 13px;
     cursor: pointer;
-    transition: left .3s linear;
+    transition: all .3s linear;
+}
+
+.button-left .switch {
+    background-color: rgb(135, 224, 2);
 }
 
 #startStop {
@@ -258,4 +266,20 @@ input {
 
 .cotainer span {
     font-size: 25px;
+}
+
+.timer-button .selected-timer {
+    background-color: rgb(255, 145, 145);
+    color: rgb(36, 29, 102);
+}
+
+.pause-start {
+    letter-spacing: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.light .base-timer__label{
+    color: rgb(173, 173, 171);
 }
