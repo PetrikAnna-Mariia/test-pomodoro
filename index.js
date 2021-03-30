@@ -190,20 +190,27 @@ const appTimer = new App();
 appTimer.addTimer([timerPomodoro, sortBreak, longBreak]);
 appTimer.currentTimer;
 
-const WARNING_THRESHOLD = 10;
-const ALERT_THRESHOLD = 5;
+
+colorCalculation = {
+    warningThreshold(){
+        return Math.floor(appTimer.currentTimer.time / 4);
+    }
+    alertThreshold(){
+        return Math.floor(appTimer.currentTimer.time / 5);
+    }
+}
 
 const COLOR_CODES = {
     info: {
-        color: "green",
+        color: "lightOrange",
     },
     warning: {
         color: "orange",
-        threshold: WARNING_THRESHOLD,
+        threshold: colorCalculation.warningThreshold,
     },
     alert: {
         color: "red",
-        threshold: ALERT_THRESHOLD,
+        threshold: colorCalculation.alertThreshold,
     },
 };
 
